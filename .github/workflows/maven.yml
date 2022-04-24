@@ -43,6 +43,18 @@ jobs:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
+      - name: Slack notification
+        uses: rtCamp/action-slack-notify@master
+        env:
+          SLACK_CHANNEL: ci
+          SLACK_MESSAGE: 'Continuous integration'
+          SLACK_TITLE: 'CI'
+          SLACK_USERNAME: 'Rideboost'
+          SLACK_ICON: "[icon URL]"
+          SLACK_COLOR: '#228B22'
+          SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_CI }}
+          MSG_MINIMAL: true
+
       - name: Deploy
         uses: safe2008/eks-actions@v0.0.4
         env:
