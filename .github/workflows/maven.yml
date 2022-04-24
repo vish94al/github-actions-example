@@ -9,6 +9,14 @@ on:
   pull_request:
     branches: [ master ]
 
+env:
+  ECR_IMAGE: web
+  ECR_TAG: latest
+  K8S_NAMESPACE: web
+  K8S_DEPLOYMENT: web-deployment
+  AWS_REGION: ap-south-1
+  EKS_CLUSTER_NAME: test
+
 jobs:
   build:
 
@@ -29,8 +37,19 @@ jobs:
         uses: mr-smithers-excellent/docker-build-push@v5
         with:
           image: web
-          tags: latest
           registry: 517641880778.dkr.ecr.ap-south-1.amazonaws.com
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
+      - name: Deploy
+        uses: safe2008/eks-actions@v0.0.4
+        env:
+          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws_region: $AWS_REGION
+          cluster_name: $EKS_CLUSTER_NAME
+        with:
+          args: |
+            kubectl set image deployment $K8S_DEPLOYMENT -n $K8S_NAMESPACE $K8S_DEPLOYMENT=$ECR_IMAGE:$ECR_TAG
+            kubectl rollout status deployment/$K8S_DEPLOYMENT -n $K8S_NAMESPACE
