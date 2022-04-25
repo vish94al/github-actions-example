@@ -54,8 +54,4 @@ jobs:
           SLACK_COLOR: '#228B22'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_CI }}
           MSG_MINIMAL: true
-        with:
-          status: ${{ job.status }}
-          fields: repo,commit,action,eventName,ref # selectable (default: repo,message)
-          if: always()
           
