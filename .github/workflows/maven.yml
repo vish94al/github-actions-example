@@ -52,7 +52,9 @@ jobs:
           SLACK_USERNAME: 'Rideboost'
           SLACK_ICON: "[icon URL]"
           SLACK_COLOR: '#228B22'
-          SLACK_Actions_URL: CI
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_CI }}
           MSG_MINIMAL: true
+        with:
+         status: ${{ job.status }}
+         fields: repo,commit,action,eventName,ref
           
