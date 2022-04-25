@@ -48,7 +48,7 @@ jobs:
         env:
           SLACK_CHANNEL: ci
           SLACK_MESSAGE: 'Continuous integration for rideboost'
-          SLACK_TITLE: 'CI'
+          SLACK_TITLE: 'Message'
           SLACK_USERNAME: 'Rideboost'
           SLACK_ICON: "[icon URL]"
           SLACK_COLOR: '#228B22'
