@@ -44,7 +44,7 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 
       - name: Slack notification
-        uses: rtCamp/action-slack-notify@v2.2.0
+        uses: rtCamp/action-slack-notify@master
         env:
           SLACK_CHANNEL: ci
           SLACK_MESSAGE: 'Continuous integration for rideboost'
