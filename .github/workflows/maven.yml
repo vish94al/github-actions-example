@@ -53,4 +53,4 @@ jobs:
           SLACK_ICON: "[icon URL]"
           SLACK_COLOR: '#228B22'
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK_URL_CI }}
-          MSG_MINIMAL: true
+          MSG_MINIMAL: Ref,Event,Actions URL,Commit
